@@ -108,6 +108,9 @@ class Line:
         else:
             raise Exception("Expected point or vector")
 
+    def param_ok(self, p):
+        return True
+
     def slope(self):
         return self.v.slope()
 
@@ -141,12 +144,23 @@ class Line:
     def __str__(self):
         return f'[Line through {self.p} slope {self.slope():.2f}]'
 
-class Segment():
+class Ray(Line):
+    def param_ok(self, p):
+        return p >= 0
+
+    def __str__(self):
+        return f'[Ray from {self.p} in direction {self.v}]'
+
+class Segment(Line):
     def __init__(self, p1, p2):
         p1.expect_point()
         p2.expect_point()
+        super().__init__(p1, p2)
         self.p1 = p1
         self.p2 = p2
+
+    def param_ok(self, p):
+        return 0 <= p and p <= 1
 
     def line(self):
         return Line(self.p1, self.p2)
