@@ -25,6 +25,10 @@ class PVec():
         return self.isvec
 
     @classmethod
+    def zero(cls):
+        return cls(0, 0, True)
+
+    @classmethod
     def unitvec(cls, slope):
         if math.isinf(slope):
             return PVec(0, 1, True)
