@@ -16,7 +16,7 @@ class PVec():
 
     @classmethod
     def vec(cls, x, y):
-        return PVec(x, y, True)
+        return cls(x, y, True)
 
     def is_point(self):
         return not self.isvec
@@ -31,10 +31,10 @@ class PVec():
     @classmethod
     def unitvec(cls, slope):
         if math.isinf(slope):
-            return PVec(0, 1, True)
+            return cls(0, 1, True)
         else:
             d = sqrt(1+slope**2)
-            return PVec(1/d, slope/d, True)
+            return cls(1/d, slope/d, True)
 
     def expect_vector(self):
         if not self.isvec:
