@@ -1,8 +1,7 @@
 
 import math
-from math import sqrt, isclose
+from math import sqrt, isclose, cos, sin, pi
 from dataclasses import dataclass
-
 
 @dataclass
 class PVec():
@@ -13,6 +12,10 @@ class PVec():
     @classmethod
     def point(cls, x, y):
         return PVec(x, y, False)
+
+    @classmethod
+    def point_polar(cls, r, th):
+        return cls(r * cos(th), r * sin(th), False)
 
     @classmethod
     def vec(cls, x, y):
