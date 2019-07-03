@@ -80,6 +80,8 @@ class PVec():
         """Multiply vector by scalar"""
         self.expect_vector()
         return PVec(self.x * s, self.y * s, True)
+    def __rmul__(self, s):
+        return self.__mul__(s)
 
     def __neg__(self):
         self.expect_vector()
