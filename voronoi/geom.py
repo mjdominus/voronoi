@@ -138,8 +138,25 @@ class Line:
                 return vv.x / self.v.x
         else:
             raise Exception("Line {self} does not contain expected point {p}")
-    def parallel(self, l2):
-        return isclose(self.slope(), l2.slope())
+
+    def is_parallel(l1, l2):
+        return isclose(l1.slope(), l2.slope())
+
+    def intersects(l1, l2):
+        p, u1, u2 = l1.intersection_util(l2)
+        return l1.param_ok(u1) and l2.param_ok(u2)
+
+    def intersection_util(l1, l2):
+        if l1.is_parallel(l2): return None
+        def det(a, b, c, d): return a*d - b*c
+
+        pp = l1.p - l2.p
+        den = -det(l1.v.x, l2.v.x, l1.v.y, l2.v.y)
+        u1 = det(pp.x, l2.v.x, pp.y, l2.v.y) / den
+        return ( l1.point_at(u1),
+                 u1,
+                 det(l1.v.x, pp.x, l1.v.y, pp.y) / den,
+                 )
 
     def __str__(self):
         return f'[Line through {self.p} slope {self.slope():.2f}]'
@@ -167,9 +184,6 @@ class Segment(Line):
 
     def length(self):
         return self.p1.distance(self.p2)
-
-    def slope(self):
-        return self.line().slope()
 
     def midpoint(self):
         return (self.p2 - self.p1) * 0.5 + self.p1
