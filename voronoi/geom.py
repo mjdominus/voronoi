@@ -161,6 +161,9 @@ class Line:
                  det(l1.v.x, pp.x, l1.v.y, pp.y) / den,
                  )
 
+    def __repr__(self):
+        return f'<{self.__class__.__name__} ({self.p} → {self.v})>'
+
     def __str__(self):
         return f'[Line through {self.p} slope {self.slope():.2f}]'
 
