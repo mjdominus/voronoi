@@ -200,17 +200,3 @@ class Segment(Line):
 
     def __str__(self):
         return f'[Segment {self.p1} to {self.p2}]'
-
-if __name__ == '__main__':
-    # ln = Line(PVec.point(0,0), PVec.point(1,1))
-    # for i in range(30):
-    #     p = PVec.point(1.2, i/10)
-    #     if ln.contains(p):
-    #         print(f"The line {ln} contains point {p}")
-    #         print(f"Its parameter is {ln.param(p):.2f}")
-    p1 = PVec.point(5,12)
-    p2 = PVec.point(7,6)
-    s = Segment(p1, p2)
-    print(s, s.midpoint())
-    print("length", s.length())
-    print("pbis", s.perpendicular_bisector())
