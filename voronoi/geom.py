@@ -183,7 +183,7 @@ class Segment(Line):
         return 0 <= p and p <= 1
 
     def line(self):
-        return Line(self.p1, self.p2)
+        return Line(self.p, self.v)
 
     def length(self):
         return self.p1.distance(self.p2)
