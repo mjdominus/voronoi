@@ -182,6 +182,9 @@ class Segment(Line):
         self.p1 = p1
         self.p2 = p2
 
+    def __repr__(self):
+        return f'<{self.__class__.__name__} ({self.p1} – {self.p2})>'
+
     def param_ok(self, p):
         return 0 <= p and p <= 1
 
