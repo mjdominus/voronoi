@@ -146,7 +146,7 @@ class Line:
         return isclose(l1.slope(), l2.slope())
 
     def intersects(l1, l2):
-        p, u1, u2 = l1.intersection_util(l2)
+        p1, u1, _, u2 = l1.intersection_util(l2)
         return l1.param_ok(u1) and l2.param_ok(u2)
 
     def intersection_util(l1, l2):
@@ -155,10 +155,12 @@ class Line:
 
         pp = l1.p - l2.p
         den = -det(l1.v.x, l2.v.x, l1.v.y, l2.v.y)
-        u1 = det(pp.x, l2.v.x, pp.y, l2.v.y) / den
+        u1 =   det(  pp.x, l2.v.x,   pp.y, l2.v.y) / den
+        u2 =  -det(l1.v.x,   pp.x, l1.v.y,   pp.y) / den
         return ( l1.point_at(u1),
                  u1,
-                 det(l1.v.x, pp.x, l1.v.y, pp.y) / den,
+                 l2.point_at(u2),
+                 u2,
                  )
 
     def __repr__(self):
